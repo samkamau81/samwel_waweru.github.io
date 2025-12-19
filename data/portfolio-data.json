@@ -63,14 +63,6 @@
     "contentFile": "components/gallery.html"
 },
 {
-    "id": "solitaire-window",
-    "title": "Solitaire",
-    "icon": "🎴",
-    "position": { "left": 140, "top": 90 },
-    "size": { "width": 600, "height": 500 },
-    "contentFile": "components/solitaire.html"
-},
-{
     "id": "experience-window",
     "title": "Professional Experience",
     "icon": "💼",
