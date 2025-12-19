@@ -1,23 +1,29 @@
-// Window Management
-function openWindow(windowId) {
-    const windowElement = document.getElementById(windowId);
-    if (windowElement) {
-        windowElement.classList.add('active');
-    }
-    const startMenu = document.getElementById('startMenu');
-    if (startMenu) {
-        startMenu.classList.remove('active');
-    }
-}
+// Window management system
+const WindowManager = {
+    open: function(windowId) {
+        const window = document.getElementById(windowId);
+        if (window) {
+            window.classList.add('active');
+        }
+        
+        // Close start menu when opening window
+        const startMenu = document.getElementById('startMenu');
+        if (startMenu) {
+            startMenu.classList.remove('active');
+        }
+    },
 
-function closeWindow(windowId) {
-    const windowElement = document.getElementById(windowId);
-    if (windowElement) {
-        windowElement.classList.remove('active');
-    }
-}
+    close: function(windowId) {
+        const window = document.getElementById(windowId);
+        if (window) {
+            window.classList.remove('active');
+        }
+    },
 
-function minimizeWindow(windowId) {
-    // In this basic version, minimize is the same as close/hide
-    closeWindow(windowId);
-}
+    minimize: function(windowId) {
+        const window = document.getElementById(windowId);
+        if (window) {
+            window.classList.remove('active');
+        }
+    }
+};

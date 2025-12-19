@@ -1,0 +1,46 @@
+/* Form Styles */
+.email-form {
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 5px;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 11px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.btn-primary {
+    background: linear-gradient(to bottom, #4a90e2 0%, #357abd 100%);
+    color: white;
+    border: 1px solid;
+    border-color: #7ab8f5 #2868a8 #2868a8 #7ab8f5;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to bottom, #5a9ff0 0%, #4685c4 100%);
+}

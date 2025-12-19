@@ -1,0 +1,90 @@
+/* Gallery Styles */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.gallery-item {
+    background: #f0f0f0;
+    border: 1px solid #808080;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.gallery-item:hover {
+    background: #e0e0e0;
+}
+
+.gallery-item-icon {
+    font-size: 48px;
+    margin-bottom: 8px;
+}
+
+.gallery-item-label {
+    font-size: 11px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.skill-category {
+    background: #f5f5f5;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-left: 4px solid #0054e3;
+}
+
+.skill-category h3 {
+    font-size: 12px;
+    color: #0054e3;
+    margin-bottom: 8px;
+}
+
+.skill-category p {
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* Solitaire Styles */
+.solitaire-container {
+    background: #0a7d3d;
+    padding: 20px;
+    min-height: 400px;
+}
+
+.solitaire-message {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+.solitaire-btn {
+    background: linear-gradient(to bottom, #4a90e2 0%, #357abd 100%);
+    color: white;
+    border: 1px solid;
+    border-color: #7ab8f5 #2868a8 #2868a8 #7ab8f5;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 3px;
+    margin: 5px;
+}
+
+.solitaire-btn:hover {
+    background: linear-gradient(to bottom, #5a9ff0 0%, #4685c4 100%);
+}
