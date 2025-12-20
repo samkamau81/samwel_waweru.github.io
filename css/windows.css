@@ -3,269 +3,179 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 94%;
-    height: 94%;
-    background: #ece9d8;
-    border: 2px solid #0054e3;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+    width: 94vw;
+    height: 94vh;
+    background: #f7f2d7;
+    border: 0.125rem solid #0054e3;
+    box-shadow: 0.3rem 0.3rem 1rem rgba(0,0,0,0.4);
     display: flex;
     flex-direction: column;
-
-    /* Center it */
     transform: translate(-50%, -50%);
+    z-index: 1000;
+
+    overflow: auto;
 }
+
 
 .desktop {
     background: #3888e3 url('../assets/xp-bliss.jfif') no-repeat center center;
     background-size: cover;
-    height: calc(100vh - 40px);
-    padding: 20px;
+    height: calc(100vh - 2.5rem);
+    padding: 2vh;
     position: relative;
 }
 
-
-
 .title-bar {
-    background: linear-gradient(to right, #0a58ca 0%, #4096ee 100%);
-    padding: 3px 5px;
-    color: white;
-    font-weight: bold;
-    font-size: 11px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 0.25rem 0.4rem;
+    font-size: 0.7rem;
 }
-
 
 .secondary-window {
-    position: absolute;
-    background: #ece9d8;
-    border: 2px solid #0054e3;
-    display: none;
-    z-index: 10;
-    opacity: 1;
-    transition: opacity 0.15s ease;
-    position: absolute;
-    border: 2px solid;
-    border-color: #ffffff #000000 #000000 #ffffff;
-    box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+    border-width: 0.125rem;
+    box-shadow: 0.25rem 0.25rem 0.6rem rgba(0,0,0,0.3);
     max-width: 95vw;
     max-height: 90vh;
-    min-width: 280px;
-    min-height: 200px;
-    overflow: hidden;
-}
-
-.secondary-window.active {
-    display: block;
-    flex-direction: column;
-    opacity: 1;
-
-}
-
-.title-bar {
-    background: linear-gradient(to right, #0a58ca 0%, #4096ee 100%);
-    padding: 3px 5px;
-    color: white;
-    font-weight: bold;
-    font-size: 11px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    min-width: 18rem;
+    min-height: 12rem;
 }
 
 .title-bar-text {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    gap: 0.3rem;
 }
 
 .title-bar-controls button {
-    width: 21px;
-    height: 21px;
-    border: 1px solid;
-    border-color: white #003c74 #003c74 white;
-    background: #d4d0c8;
-    font-size: 10px;
-    margin-left: 2px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #000;
-}
-
-.title-bar-controls button:active {
-    border-color: #003c74 white white #003c74;
+    width: 1.3rem;
+    height: 1.3rem;
+    font-size: 0.6rem;
+    margin-left: 0.15rem;
 }
 
 .window-content {
-    flex: 1;
-    overflow-y: auto;
-    background: white;
-    padding: 30px;
+    padding: 2rem;
 }
 
 /* Profile Section */
 .profile-header {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #0054e3;
-}
-
-.profile-image-container {
-    flex-shrink: 0;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
 }
 
 .profile-frame {
-    background: #d4d0c8;
-    padding: 8px;
-    border: 2px solid;
-    border-color: #ffffff #808080 #808080 #ffffff;
-    box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+    padding: 0.5rem;
+    border-width: 0.125rem;
+    box-shadow: 0.2rem 0.2rem 0.4rem rgba(0,0,0,0.3);
 }
 
 .profile-frame-inner {
-    border: 2px solid;
-    border-color: #808080 #ffffff #ffffff #808080;
-    padding: 2px;
-    background: #fff;
+    border-width: 0.125rem;
+    padding: 0.2rem;
 }
 
 .profile-image {
-    width: 190px;
-    height: 250px;
-    object-fit: cover;
-    display: block;
-}
-
-.profile-info {
-    flex: 1;
+    width: 16vw;
+    max-width: 190px;
+    height: auto;
+    aspect-ratio: 4.5 / 5;
 }
 
 .profile-name {
-    font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif;
-    font-size: 30px;
-    color: #0054e3;
-    margin-bottom: 5px;
-    font-weight: bold;
+    font-size: 2rem;
 }
 
 .profile-title {
-    font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif;
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 15px;
+    font-size: 1rem;
 }
 
 .profile-contact {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    font-size: 11px;
-    margin-top: 15px;
+    gap: 0.5rem;
+    font-size: 0.75rem;
 }
 
 .profile-contact div {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
-    font-size: 13px;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.8rem;
 }
 
 .profile-contact i {
-    width: 18px;
-    color: #1a4fa3;
+    width: 1.2rem;
 }
 
 /* Content Sections */
 .section {
-    margin: 25px 0;
+    margin: 2rem 0;
 }
 
 .section-title {
-    font-size: 18px;
-    font-family: "Windows Command Prompt Regular", monospace, sans-serif;
-    color: #0054e3;
-    margin-bottom: 12px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid #ccc;
-    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.3rem;
 }
 
 .job-item {
-    background: #f5f5f5;
-    padding: 12px;
-    margin: 10px 0;
-    border-left: 4px solid #0054e3;
+    padding: 0.75rem;
+    margin: 0.6rem 0;
+    border-left-width: 0.25rem;
 }
 
 .job-header {
-    font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    color: #000;
-    margin-bottom: 5px;
+    font-size: 1rem;
 }
 
 .job-meta {
-    font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif;
-    font-size: 14px;
-    color: #3e3c3c;
-    margin-bottom: 8px;
+    font-size: 0.9rem;
 }
 
 .job-description {
-    font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif;
-    font-size: 13px;
+    font-size: 0.85rem;
     line-height: 1.6;
 }
 
 .job-description ul {
-    margin-left: 20px;
-    margin-top: 5px;
+    margin-left: 1.2rem;
 }
 
 .job-description li {
-    margin: 3px 0;
+    margin: 0.2rem 0;
 }
 
+/* Mobile fullscreen window */
 @media (max-width: 600px) {
     .secondary-window {
-        left: 0 !important;
-        top: 0 !important;
         width: 100vw !important;
-        height: calc(100vh - 40px) !important;
-        border-radius: 0;
+        height: calc(100vh - 2.5rem) !important;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-image {
+        width: 50vw;
     }
 }
+
 .menu-icon-img {
-    width: 5%;
-    height: 5%;
-    margin-right: 2%;
-    vertical-align: middle;
+    width: 5vw;
+    height: auto;
+    margin-right: 2vw;
 }
+
 /* XP-style icon tab */
 .taskbar-icon-tab {
-    width: 100%;
-    height: 39px;
-    background: rgba(255, 255, 255, 0.2); /* semi-transparent */
-    border: 1px solid rgba(0,0,0,0.4);
-    border-radius: 3px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -1px 2px rgba(0,0,0,0.3);
+    font-size: 0.8rem;
+    width: 4rem;
+    height: 2.4rem;
+    border-radius: 0.2rem;
 }
+
 .taskbar-title {
-    display: flex;
-    align-items: center;
-    font-size: 11px;
-    font-weight: bold;
-    color: white;
-    gap: 6px;
+    font-size: 0.7rem;
+    gap: 0.4rem;
 }
+
 .taskbar-icon-tab img {
     width: 100%;
     height: 100%;

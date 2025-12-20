@@ -1,30 +1,28 @@
-
 /* Taskbar and Start Menu */
 .taskbar {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 40px;
+    height: 2.5rem;
     background: linear-gradient(to bottom, #245edb 0%, #1941a5 100%);
-    border-top: 1px solid #1659e7;
+    border-top: 0.06rem solid #1659e7;
     display: flex;
     align-items: center;
-    padding: 3px 4px;
-    box-shadow: 0 -1px 3px rgba(0,0,0,0.2);
+    padding: 0.2rem 0.25rem;
+    box-shadow: 0 -0.06rem 0.2rem rgba(0,0,0,0.2);
     z-index: 1000;
-    gap: 4px;
+    gap: 0.25rem;
 }
-
 
 .start-button {
     background: url('../assets/windows-xp-start-button-png-3.jpg') no-repeat center center;
     background-size: 100% 100%;
     border: none;
     cursor: pointer;
-    width: 100px;
-    height: 38px;
-    border-radius: 0 12px 12px 0;
+    width: 6.25rem;
+    height: 2.35rem;
+    border-radius: 0 0.6rem 0.6rem 0;
     padding: 0;
     position: relative;
     flex-shrink: 0;
@@ -36,48 +34,47 @@
 
 .start-button:active {
     filter: brightness(0.9);
-    transform: translateY(1px);
+    transform: translateY(0.06rem);
 }
-
 
 .taskbar-title {
     color: white;
-    font-size: 11px;
+    font-size: 0.7rem;
     font-weight: bold;
-    padding: 0 10px;
+    padding: 0 0.6rem;
 }
 
 .system-tray {
     display: flex;
-    gap: 8px;
+    gap: 0.5rem;
     align-items: center;
-    padding: 0 10px;
+    padding: 0 0.6rem;
     background: #0c6cb8;
-    height: 28px;
-    border: 1px solid;
+    height: 1.75rem;
+    border: 0.06rem solid;
     border-color: #084a87 #0d7fcd #0d7fcd #084a87;
     margin-left: auto;
-    border-radius: 2px;
+    border-radius: 0.15rem;
 }
 
 .clock {
     color: white;
     font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif;
-    font-size: 13px;
+    font-size: 0.8rem;
     font-weight: bold;
 }
 
 /* Start Menu */
 .start-menu {
     position: fixed;
-    bottom: 40px;
-    left: 4px;
-    width: 350px;
+    bottom: 2.5rem;
+    left: 0.25rem;
+    width: 22rem;
     background: #d4d0c8;
-    border: 2px solid;
+    border: 0.125rem solid;
     border-color: #ffffff #000000 #000000 #ffffff;
     display: none;
-    box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+    box-shadow: 0.2rem 0.2rem 0.5rem rgba(0,0,0,0.3);
     z-index: 1001;
 }
 
@@ -88,39 +85,39 @@
 .start-menu-header {
     background: linear-gradient(to bottom, #245edb 0%, #1941a5 100%);
     color: white;
-    padding: 25px 15px;
+    padding: 1.5rem 1rem;
 }
 
 .start-menu-header-name {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
 .start-menu-header-title {
-    font-size: 12px;
+    font-size: 0.75rem;
     opacity: 0.9;
-    margin-top: 5px;
+    margin-top: 0.3rem;
 }
 
 .start-menu-separator {
-    height: 2px;
+    height: 0.125rem;
     background: linear-gradient(to right, #808080 0%, #ffffff 50%, #808080 100%);
 }
 
 .start-menu-items {
-    padding: 5px 0;
+    padding: 0.3rem 0;
 }
 
 .start-menu-item {
-    padding: 10px 15px 10px 50px;
+    padding: 0.6rem 1rem 0.6rem 3rem;
     cursor: pointer;
     font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif;
-    font-size: 13px;
+    font-size: 0.8rem;
     line-height: 1.6;
     position: relative;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.6rem;
 }
 
 .start-menu-item:hover {
@@ -130,8 +127,8 @@
 
 .menu-icon {
     position: absolute;
-    left: 20px;
-    font-size: 20px;
+    left: 1.25rem;
+    font-size: 1.25rem;
 }
 
 .logout-item {
@@ -142,4 +139,8 @@
 .logout-item:hover {
     background: #c44;
     color: white;
+}
+.menu-icon-img {
+    width: 1.2rem;
+    height: auto;
 }
