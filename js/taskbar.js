@@ -39,6 +39,16 @@ const StartMenu = {
     }
 };
 
+const startBtn = document.getElementById('startButton');
+startBtn.classList.add('inactive');
+startBtn.addEventListener('click', () => {
+    startBtn.classList.remove('inactive');
+});
+function closeStartMenu() {
+    document.getElementById('startMenu').classList.remove('active');
+    startBtn.classList.add('inactive');
+}
+
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     StartMenu.init();

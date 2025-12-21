@@ -27,6 +27,25 @@
     position: relative;
     flex-shrink: 0;
 }
+@keyframes xp-blink {
+    0% {
+        filter: brightness(1);
+        box-shadow: none;
+    }
+    50% {
+        filter: brightness(1.15);
+        box-shadow: 0 0 6px rgba(255,255,255,0.6);
+    }
+    100% {
+        filter: brightness(1);
+        box-shadow: none;
+    }
+}
+
+/* Inactive (blinking) start button */
+.start-button.inactive {
+    animation: xp-blink 1.8s infinite ease-in-out;
+}
 
 .start-button:hover {
     filter: brightness(1.1);
