@@ -91,12 +91,10 @@
     cursor: grabbing;
 }
 
-/* Gallery Styles - XP Themed with Mobile Support */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 15px;
-    margin: 15px 0;
     padding: 10px;
 }
 
