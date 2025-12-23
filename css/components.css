@@ -90,3 +90,111 @@
 #viewer-image:active {
     cursor: grabbing;
 }
+
+/* Gallery Styles - XP Themed with Mobile Support */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+    margin: 15px 0;
+    padding: 10px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 10px;
+        padding: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 5px;
+    }
+}
+
+.gallery-item {
+    background: #ffffff;
+    border: 1px solid #c0c0c0;
+    padding: 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.gallery-item:hover {
+    background: #e8f4f8;
+    border-color: #0054e3;
+    box-shadow: 0 0 4px rgba(0, 84, 227, 0.3);
+}
+
+.gallery-item:active {
+    background: #cce8ff;
+}
+
+.gallery-thumbnail {
+    width: 100%;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    border: 1px solid #d0d0d0;
+    margin-bottom: 6px;
+    overflow: hidden;
+}
+
+.gallery-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-item-icon {
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* Mobile icon size */
+@media (max-width: 480px) {
+    .gallery-item-icon {
+        font-size: 32px;
+    }
+}
+
+.gallery-item-label {
+    font-size: 10px;
+    color: #000;
+    font-weight: normal;
+    margin-bottom: 2px;
+    word-break: break-word;
+    width: 100%;
+    line-height: 1.2;
+}
+
+.gallery-item-size {
+    font-size: 8px;
+    color: #666;
+}
+
+/* Mobile text adjustments */
+@media (max-width: 480px) {
+    .gallery-item-label {
+        font-size: 9px;
+    }
+    
+    .gallery-item-size {
+        font-size: 7px;
+    }
+}
