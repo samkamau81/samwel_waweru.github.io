@@ -80,7 +80,9 @@
 
 #image-viewer .window-content {
     background: #f0f0f0;
+    
 }
+
 
 #viewer-image {
     cursor: grab;
