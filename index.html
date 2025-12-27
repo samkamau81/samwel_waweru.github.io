@@ -189,6 +189,43 @@
         <div class="window-content">
 
             <div class="section-title">ENGINEERING PROJECTS</div>
+            <!-- Golden Record -->
+            <div class="job-item">
+                <div class="job-header">Golden Record (AI-Enhanced NEMIS Data Integrity)</div>
+                <br>
+                <div class="project-body">
+                    <img src="assets/MoEgovt_seal.jpg" alt="Golden Record Project" class="project-image">
+
+                    <div class="job-description">
+                        <p>
+                            <strong>Solution:</strong><br>
+                            Designed an AI-powered Golden Record system to resolve duplicate and inconsistent learner and
+                            school records in NEMIS, enabling a single trusted source of truth for education planning,
+                            funding, and policy decisions.
+                        </p>
+
+                        <p>
+                            <strong>Engineering Work:</strong><br>
+                            Built a data ingestion and normalization pipeline integrating learner, school, attendance,
+                            and bursary records. Implemented rule-based entity resolution as a baseline, followed by
+                            similarity scoring and human-in-the-loop validation workflows. Designed flagging mechanisms
+                            for under-reporting, over-reporting, and data quality gaps, with audit trails for governance
+                            and transparency.
+                        </p>
+
+                        <p>
+                            <strong>Tech Stack:</strong><br>
+                            Python, Entity Resolution, Fuzzy Matching, Data Pipelines, Human-in-the-Loop Systems,
+                            Synthetic Data Generation, Analytics Dashboards
+                        </p>
+
+                        <p>
+                            <strong>Focus Areas:</strong><br>
+                            Data Integrity, AI-assisted Decision Support, Scalable Public-Sector Systems, Responsible AI
+                        </p>
+                    </div>
+                </div>
+            </div>
 
             <!-- FinGPT -->
             <div class="job-item">
@@ -416,7 +453,7 @@
             <h2 style="color: #0054e3; margin-bottom: 15px;">My Pictures</h2>
             <div class="gallery-grid">
                 <div class="gallery-item" onclick="openImageViewer('assets/karate.jpg', 'Karate.jpg')">
-                    <div class="gallery-thumbnail">
+                    <div class="gallery-thumbnail" >
                         <img src="assets/karate.jpg" alt="Karate">
                     </div>
                     <div class="gallery-item-label">Karate.jpg</div>
@@ -487,11 +524,6 @@
     <!-- Taskbar -->
     <div class="taskbar">
         <button class="start-button" id="startButton"></button>
-        <div class="taskbar-title">
-            <div class="taskbar-icon-tab">
-                <span>Samwel Waweru</span>
-            </div>
-        </div>
         <div class="system-tray">
             <span class="clock" id="clock">12:00 PM</span>
         </div>

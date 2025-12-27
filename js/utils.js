@@ -24,51 +24,35 @@ const Utils = {
     }
 };
 
-// Image viewer function - Windows XP Style
 function openImageViewer(imageSrc, imageName) {
     // Create image viewer window
     const viewer = document.createElement('div');
     viewer.id = 'image-viewer';
     viewer.className = 'secondary-window active';
-    viewer.style.cssText = 'left: 10%; top: 5%; width: 80%; height: 85%; z-index: 200;';
+    
+    // Responsive centering with different sizes for different devices
+    viewer.style.cssText = `
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: min(50vw, 400px);
+        height: min(65vh, 650px);
+        z-index: 200;
+    `;
     
     viewer.innerHTML = `
         <div class="title-bar">
             <div class="title-bar-text">
                 <span>🖼️</span>
-                <span>${imageName} - Windows Picture and Fax Viewer</span>
+                <span class="viewer-title">${imageName} - Windows Picture and Fax Viewer</span>
             </div>
             <div class="title-bar-controls">
                 <button onclick="closeImageViewer()">×</button>
             </div>
         </div>
-        <div class="window-content" style="padding: 0; background: #f0f0f0; display: flex; flex-direction: column;">
-            <!-- Toolbar -->
-            <div style="background: #ece9d8; padding: 5px 10px; border-bottom: 1px solid #ccc; display: flex; gap: 5px; align-items: center;">
-                <button class="viewer-btn" onclick="rotateImage(-90)" title="Rotate Left">
-                    <span style="font-size: 16px;">↶</span>
-                </button>
-                <button class="viewer-btn" onclick="rotateImage(90)" title="Rotate Right">
-                    <span style="font-size: 16px;">↷</span>
-                </button>
-                <div style="width: 1px; height: 20px; background: #999; margin: 0 5px;"></div>
-                <button class="viewer-btn" onclick="zoomImage('in')" title="Zoom In">
-                    <span style="font-size: 16px;">🔍+</span>
-                </button>
-                <button class="viewer-btn" onclick="zoomImage('out')" title="Zoom Out">
-                    <span style="font-size: 16px;">🔍-</span>
-                </button>
-                <button class="viewer-btn" onclick="zoomImage('fit')" title="Best Fit">
-                    <span style="font-size: 16px;">⊡</span>
-                </button>
-                <button class="viewer-btn" onclick="zoomImage('actual')" title="Actual Size">
-                    <span style="font-size: 16px;">1:1</span>
-                </button>
-                <div style="margin-left: auto; font-size: 11px; color: #666;">
-                    <span id="zoom-level">100%</span>
-                </div>
-            </div>
-            
+        <div class="window-content" style="padding: 0; background: #f0f0f0; display: flex; flex-direction: column; height: calc(100% - 27px);">
+    
             <!-- Image Container -->
             <div style="flex: 1; overflow: auto; display: flex; align-items: center; justify-content: center; background: #808080; position: relative;">
                 <img id="viewer-image" src="${imageSrc}" alt="${imageName}" 
@@ -77,9 +61,9 @@ function openImageViewer(imageSrc, imageName) {
             </div>
             
             <!-- Status Bar -->
-            <div style="background: #ece9d8; padding: 5px 10px; border-top: 1px solid #ccc; font-size: 10px; color: #000; display: flex; justify-content: space-between;">
-                <span>${imageName}</span>
-                <span id="image-info">Loading...</span>
+            <div class="viewer-status" style="background: #ece9d8; padding: 5px 10px; border-top: 1px solid #ccc; font-size: 10px; color: #000; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0;">${imageName}</span>
+                <span id="image-info" style="flex-shrink: 0;">Loading...</span>
             </div>
         </div>
     `;
@@ -89,19 +73,119 @@ function openImageViewer(imageSrc, imageName) {
     // Make window draggable
     makeWindowDraggable(viewer);
     
+    // Re-center on window resize or orientation change
+    let resizeTimeout;
+    const handleResize = () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            if (document.getElementById('image-viewer') && !viewer.dataset.dragged) {
+                centerViewer();
+            }
+        }, 100);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+    
     // Load image info
     const img = document.getElementById('viewer-image');
     img.onload = function() {
-        document.getElementById('image-info').textContent = 
-            `${this.naturalWidth} × ${this.naturalHeight} pixels`;
+        const infoElement = document.getElementById('image-info');
+        if (infoElement) {
+            infoElement.textContent = `${this.naturalWidth} × ${this.naturalHeight}px`;
+        }
     };
 }
 
-// Close image viewer
+// Close image viewer and clean up
 function closeImageViewer() {
     const viewer = document.getElementById('image-viewer');
     if (viewer) {
         viewer.remove();
+        // Clean up event listeners
+        window.removeEventListener('resize', handleResize);
+        window.removeEventListener('orientationchange', handleResize);
+    }
+}
+
+// Center viewer on screen
+function centerViewer() {
+    const viewer = document.getElementById('image-viewer');
+    if (!viewer) return;
+    
+    viewer.style.left = '50%';
+    viewer.style.top = '50%';
+    viewer.style.transform = 'translate(-50%, -50%)';
+    delete viewer.dataset.dragged;
+}
+
+// Updated makeWindowDraggable with centering support
+function makeWindowDraggable(windowElement) {
+    const titleBar = windowElement.querySelector('.title-bar');
+    let isDragging = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    
+    titleBar.addEventListener('mousedown', dragStart);
+    titleBar.addEventListener('touchstart', dragStart, { passive: false });
+    
+    function dragStart(e) {
+        if (e.target.tagName === 'BUTTON') return;
+        
+        e.preventDefault();
+        
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        
+        // Calculate offset from current position
+        const rect = windowElement.getBoundingClientRect();
+        initialX = clientX - rect.left;
+        initialY = clientY - rect.top;
+        
+        // Remove transform to enable absolute positioning
+        windowElement.style.transform = 'none';
+        windowElement.style.left = rect.left + 'px';
+        windowElement.style.top = rect.top + 'px';
+        windowElement.dataset.dragged = 'true';
+        
+        isDragging = true;
+        
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('touchmove', drag, { passive: false });
+        document.addEventListener('mouseup', dragEnd);
+        document.addEventListener('touchend', dragEnd);
+    }
+    
+    function drag(e) {
+        if (!isDragging) return;
+        
+        e.preventDefault();
+        
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        
+        currentX = clientX - initialX;
+        currentY = clientY - initialY;
+        
+        // Keep window within viewport
+        const maxX = window.innerWidth - windowElement.offsetWidth;
+        const maxY = window.innerHeight - windowElement.offsetHeight;
+        
+        currentX = Math.max(0, Math.min(currentX, maxX));
+        currentY = Math.max(0, Math.min(currentY, maxY));
+        
+        windowElement.style.left = currentX + 'px';
+        windowElement.style.top = currentY + 'px';
+    }
+    
+    function dragEnd() {
+        isDragging = false;
+        document.removeEventListener('mousemove', drag);
+        document.removeEventListener('touchmove', drag);
+        document.removeEventListener('mouseup', dragEnd);
+        document.removeEventListener('touchend', dragEnd);
     }
 }
 
@@ -149,53 +233,3 @@ function zoomImage(action) {
         zoomLevel.textContent = `${Math.round(currentZoom * 100)}%`;
     }
 }
-
-// Make window draggable
-function makeWindowDraggable(windowElement) {
-    const titleBar = windowElement.querySelector('.title-bar');
-    let isDragging = false;
-    let currentX;
-    let currentY;
-    let initialX;
-    let initialY;
-    
-    titleBar.addEventListener('mousedown', dragStart);
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('mouseup', dragEnd);
-    
-    function dragStart(e) {
-        if (e.target.tagName === 'BUTTON') return;
-        
-        initialX = e.clientX - windowElement.offsetLeft;
-        initialY = e.clientY - windowElement.offsetTop;
-        isDragging = true;
-    }
-    
-    function drag(e) {
-        if (!isDragging) return;
-        
-        e.preventDefault();
-        currentX = e.clientX - initialX;
-        currentY = e.clientY - initialY;
-        
-        windowElement.style.left = currentX + 'px';
-        windowElement.style.top = currentY + 'px';
-    }
-    
-    function dragEnd() {
-        isDragging = false;
-    }
-}
-
-// Reset viewer state when opening new image
-document.addEventListener('DOMContentLoaded', () => {
-    // Reset on new viewer
-    const observer = new MutationObserver(() => {
-        if (document.getElementById('image-viewer')) {
-            currentRotation = 0;
-            currentZoom = 1;
-        }
-    });
-    
-    observer.observe(document.body, { childList: true });
-});
