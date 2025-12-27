@@ -38,13 +38,12 @@ function openImageViewer(imageSrc, imageName) {
         transform: translate(-50%, -50%);
         width: min(50vw, 400px);
         height: min(65vh, 650px);
-        z-index: 200;
     `;
     
     viewer.innerHTML = `
         <div class="title-bar">
             <div class="title-bar-text">
-                <span>🖼️</span>
+                <img src="assets/gallery.png" class="menu-icon-img" alt="Gallery">
                 <span class="viewer-title">${imageName} - Windows Picture and Fax Viewer</span>
             </div>
             <div class="title-bar-controls">
@@ -52,7 +51,32 @@ function openImageViewer(imageSrc, imageName) {
             </div>
         </div>
         <div class="window-content" style="padding: 0; background: #f0f0f0; display: flex; flex-direction: column; height: calc(100% - 27px);">
-    
+            <!-- Toolbar -->
+            <div class="viewer-toolbar" style="background: #ece9d8; padding: 5px 10px; border-bottom: 1px solid #ccc; display: flex; gap: 5px; align-items: center; flex-wrap: wrap; min-height: 36px;">
+                <button class="viewer-btn" onclick="event.stopPropagation(); rotateImage(-90)" title="Rotate Left">
+                    <span>↶</span>
+                </button>
+                <button class="viewer-btn" onclick="event.stopPropagation(); rotateImage(90)" title="Rotate Right">
+                    <span>↷</span>
+                </button>
+                <div class="viewer-separator" style="width: 1px; height: 20px; background: #999; margin: 0 5px;"></div>
+                <button class="viewer-btn" onclick="event.stopPropagation(); zoomImage('in')" title="Zoom In">
+                    <span>🔍+</span>
+                </button>
+                <button class="viewer-btn" onclick="event.stopPropagation(); zoomImage('out')" title="Zoom Out">
+                    <span>🔍-</span>
+                </button>
+                <button class="viewer-btn" onclick="event.stopPropagation(); zoomImage('fit')" title="Best Fit">
+                    <span>⊡</span>
+                </button>
+                <button class="viewer-btn" onclick="event.stopPropagation(); zoomImage('actual')" title="Actual Size">
+                    <span>1:1</span>
+                </button>
+                <div style="margin-left: auto; font-size: 11px; color: #666;">
+                    <span id="zoom-level">100%</span>
+                </div>
+            </div>
+            
             <!-- Image Container -->
             <div style="flex: 1; overflow: auto; display: flex; align-items: center; justify-content: center; background: #808080; position: relative;">
                 <img id="viewer-image" src="${imageSrc}" alt="${imageName}" 
@@ -189,47 +213,69 @@ function makeWindowDraggable(windowElement) {
     }
 }
 
-// Rotation state
-let currentRotation = 0;
-let currentZoom = 1;
-
-// Rotate image
-function rotateImage(degrees) {
-    currentRotation += degrees;
-    const img = document.getElementById('viewer-image');
-    if (img) {
-        img.style.transform = `rotate(${currentRotation}deg) scale(${currentZoom})`;
-    }
-}
-
-// Zoom image
+// Improved zoom function with container constraints
 function zoomImage(action) {
     const img = document.getElementById('viewer-image');
     const zoomLevel = document.getElementById('zoom-level');
+    const container = document.getElementById('image-container');
     
     if (!img) return;
     
     switch(action) {
         case 'in':
-            currentZoom = Math.min(currentZoom * 1.2, 5);
+            currentZoom = Math.min(currentZoom * 1.25, 3); // Reduced max zoom
+            img.style.maxWidth = 'none';
+            img.style.maxHeight = 'none';
+            img.style.width = 'auto';
+            img.style.height = 'auto';
+            if (container) {
+                container.style.overflow = 'auto';
+            }
             break;
         case 'out':
-            currentZoom = Math.max(currentZoom / 1.2, 0.1);
+            currentZoom = Math.max(currentZoom / 1.25, 0.2);
+            if (currentZoom <= 1) {
+                img.style.maxWidth = '100%';
+                img.style.maxHeight = '100%';
+                if (container) {
+                    container.style.overflow = 'hidden';
+                }
+            }
             break;
         case 'fit':
             currentZoom = 1;
             img.style.maxWidth = '100%';
             img.style.maxHeight = '100%';
+            img.style.width = 'auto';
+            img.style.height = 'auto';
+            if (container) {
+                container.style.overflow = 'hidden';
+            }
             break;
         case 'actual':
             currentZoom = 1;
             img.style.maxWidth = 'none';
             img.style.maxHeight = 'none';
+            img.style.width = 'auto';
+            img.style.height = 'auto';
+            if (container) {
+                container.style.overflow = 'auto';
+            }
             break;
     }
     
     img.style.transform = `rotate(${currentRotation}deg) scale(${currentZoom})`;
+    
     if (zoomLevel) {
         zoomLevel.textContent = `${Math.round(currentZoom * 100)}%`;
+    }
+}
+
+// Improved rotate function
+function rotateImage(degrees) {
+    currentRotation += degrees;
+    const img = document.getElementById('viewer-image');
+    if (img) {
+        img.style.transform = `rotate(${currentRotation}deg) scale(${currentZoom})`;
     }
 }
